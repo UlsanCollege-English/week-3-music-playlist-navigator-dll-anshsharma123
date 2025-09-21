@@ -38,17 +38,19 @@ class Playlist:
         return self.current.title
 
     def next(self):
-        """Move to the next song if possible."""
-        if not self.current or not self.current.next:
+        """Move to the next song if possible, else stay at tail."""
+        if not self.current:
             return None
-        self.current = self.current.next
+        if self.current.next:
+            self.current = self.current.next
         return self.current.title
 
     def prev(self):
-        """Move to the previous song if possible."""
-        if not self.current or not self.current.prev:
+        """Move to the previous song if possible, else stay at head."""
+        if not self.current:
             return None
-        self.current = self.current.prev
+        if self.current.prev:
+            self.current = self.current.prev
         return self.current.title
 
     def insert_after_current(self, title):
